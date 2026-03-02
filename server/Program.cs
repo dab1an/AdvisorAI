@@ -7,6 +7,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAuditParserService, AuditParserService>();
+builder.Services.AddScoped<IFlowchartParserService, FlowchartParserService>();
 
 builder.Services.AddControllers();
 
