@@ -1,0 +1,16 @@
+@import url("https://use.typekit.net/itw6tmt.css");
+
+@config "../tailwind.config.js";
+@import "tailwindcss";
+
+/*
+  why does tailwind not have a "no-scrollbar" class
+*/
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
