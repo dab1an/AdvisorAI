@@ -15,6 +15,7 @@ builder.Services.AddSingleton<PineconeClient>(sp =>
 
 builder.Services.AddScoped<IAuditParserService, AuditParserService>();
 builder.Services.AddScoped<IFlowchartParserService, FlowchartParserService>();
+builder.Services.AddScoped<IEmbeddingService, EmbeddingService>();
 
 builder.Services.AddControllers();
 

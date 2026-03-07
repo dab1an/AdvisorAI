@@ -6,7 +6,7 @@ namespace server.Controllers;
 
 [Route("api/flowchart")]
 [ApiController]
-public class FlowchartController(IFlowchartParserService flowchartParserService) : ControllerBase
+public class FlowchartController(IFlowchartParserService flowchartParserService, IEmbeddingService embeddingService) : ControllerBase
 {
     [HttpPost]
     public async Task<ActionResult<FlowchartCurriculum>> GetFlowchartInfo(
@@ -26,7 +26,7 @@ public class FlowchartController(IFlowchartParserService flowchartParserService)
         }
 
         var result = await flowchartParserService.ParseFlowchartAsync(images);
-
+        await embeddingService.UpsertFlowchartAsync(result);
         return Ok(result);
     }
 }
