@@ -25,7 +25,7 @@ For the easiest developer experience while writing for the frontend I recommend 
 <img width="727" height="160" alt="image" src="https://github.com/user-attachments/assets/557da588-782f-434b-a3d3-785942be795e" />
 
 
-# Run Backend 
+# Backend 
 
 Install a .NET compatible IDE like `Rider` or `Visual Studio` (not VSC)
 
