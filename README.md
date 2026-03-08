@@ -1,7 +1,29 @@
-# Run Frontend
+# Frontend
 
+### Running
 Navigate to `client` folder
-In terminal run `npm run dev`
+
+```
+npm i
+npm run dev
+```
+
+### Tailwind CSS
+
+For the easiest developer experience while writing for the frontend I recommend downloading these extensions for [TailwindCSS](https://tailwindcss.com/):
+
+
+#### Tailwind CSS Intellisense
+<img width="687" height="157" alt="image" src="https://github.com/user-attachments/assets/3fd43ec1-f465-495e-8094-79541e4e3639" />
+
+
+#### Tailwind Fold
+<img width="576" height="164" alt="image" src="https://github.com/user-attachments/assets/05e8855a-e802-4f4a-87e8-12552aed416b" />
+
+
+#### Tailwind Class Sort (Prettier)
+<img width="727" height="160" alt="image" src="https://github.com/user-attachments/assets/557da588-782f-434b-a3d3-785942be795e" />
+
 
 # Run Backend 
 
