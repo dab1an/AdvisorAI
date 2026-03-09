@@ -9,7 +9,7 @@ namespace server.Controllers;
 public class FlowchartController(IFlowchartParserService flowchartParserService, IEmbeddingService embeddingService) : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult<FlowchartCurriculum>> GetFlowchartInfo(
+    public async Task<ActionResult<FlowchartCurriculum>> UploadFlowchartInfoAsync(
         List<IFormFile> files)
     {
         var images = new List<(byte[], string)>();

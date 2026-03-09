@@ -11,41 +11,6 @@ public class EmbeddingService(
 {
     private const string IndexName = "advisor-ai";
 
-    public async Task UpsertAuditAsync(List<AuditSection> sections, string studentId)
-    {
-        var index = pinecone.Index(IndexName);
-
-        foreach (var section in sections)
-        {
-            foreach (var req in section.Requirements)
-            {
-                string chunkText = BuildAuditChunkText(section, req);
-                var result = await embeddingGenerator.GenerateAsync([chunkText]);
-                var vector = result.First().Vector.ToArray();
-
-                await index.UpsertAsync(new UpsertRequest
-                {
-                    Vectors =
-                    [
-                        new Vector
-                        {
-                            Id = $"{studentId}_{section.Title}_{req.Title}".Replace(" ", "_"),
-                            Values = vector,
-                            Metadata = new Metadata
-                            {
-                                ["studentId"] = studentId,
-                                ["documentType"] = "audit",
-                                ["section"] = section.Title,
-                                ["requirement"] = req.Title,
-                                ["isSatisfied"] = req.IsSatisfied.ToString(),
-                                ["text"] = chunkText
-                            }
-                        }
-                    ]
-                });
-            }
-        }
-    }
     public async Task UpsertFlowchartAsync(FlowchartCurriculum curriculum)
     {
         var index = pinecone.Index(IndexName);
@@ -79,14 +44,5 @@ public class EmbeddingService(
                 ]
             });
         }
-    }
-
-    private static string BuildAuditChunkText(AuditSection section, AuditRequirement req)
-    {
-        var courses = string.Join(", ", req.CoursesTaken.Select(c => c.ToString()));
-        return $"Section: {section.Title}\n" +
-               $"Requirement: {req.Title}\n" +
-               $"Status: {(req.IsSatisfied ? "Satisfied" : "Not Satisfied")}\n" +
-               $"Courses taken: {(courses.Length > 0 ? courses : "None")}";
     }
 }
