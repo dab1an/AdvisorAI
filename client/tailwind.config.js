@@ -20,9 +20,14 @@ export default {
             transform: "translateY(0)",
           },
         },
+        shimmer: {
+          "0%": { backgroundPosition: "200% 0" },
+          "100%": { backgroundPosition: "-200% 0" },
+        },
       },
       animation: {
         "slide-up": "slideUp 0.25s ease forwards",
+        shimmer: "shimmer 2s ease-in-out infinite",
       },
       fontFamily: {
         instrument: ['"instrument-serif"', "sans-serif"],
