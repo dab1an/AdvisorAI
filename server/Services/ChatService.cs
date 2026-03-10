@@ -36,7 +36,7 @@ public class ChatService : IChatService
             }
             else if (file.ContentType is "application/pdf")
             {
-                var pdfText = ExtractPdfText(file);
+                string pdfText = ExtractPdfText(file);
                 items.Add(new TextContent($"\n\n--- Attached PDF content ---\n{pdfText}"));
             }
         }
