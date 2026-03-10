@@ -11,7 +11,7 @@ public class ChatService : IChatService
 
     public ChatService(IConfiguration configuration)
     {
-        var apiKey = configuration["OPENAI_API_KEY"]
+        string apiKey = configuration["OPENAI_API_KEY"]
             ?? throw new InvalidOperationException("OPENAI_API_KEY is not configured.");
 
         Kernel kernel = Kernel.CreateBuilder()

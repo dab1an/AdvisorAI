@@ -16,7 +16,8 @@ public class FlowchartParserService : IFlowchartParserService
 
     public FlowchartParserService(IConfiguration configuration)
     {
-        string apiKey = configuration["OPENAI_API_KEY"]!; // appsettings.json
+        string apiKey = configuration["OPENAI_API_KEY"]
+            ?? throw new InvalidOperationException("OPENAI_API_KEY is not configured.");
         
         IKernelBuilder builder = Kernel.CreateBuilder();
         builder.AddOpenAIChatCompletion(Model, apiKey, httpClient: new HttpClient
