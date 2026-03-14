@@ -10,11 +10,13 @@ export interface Message {
 }
 
 async function fetchAIResponse(
+  conversationId: string,
   message: string,
   file?: File | null,
 ): Promise<string> {
   const formData = new FormData();
   formData.append("message", message);
+  formData.append("conversationId", conversationId);
   if (file) formData.append("file", file);
 
   const response = await fetch("http://localhost:5099/api/Chat", {
@@ -29,6 +31,7 @@ async function fetchAIResponse(
 export function useChatMessages() {
   const [messages, setMessages] = useState<Message[]>([]);
   const messageIdRef = useRef(0);
+  const conversationIdRef = useRef(crypto.randomUUID());
 
   const sendAndGetResponse = async (text: string, file?: File | null) => {
     const thinkingId = ++messageIdRef.current;
@@ -38,7 +41,11 @@ export function useChatMessages() {
     ]);
 
     try {
-      const response = await fetchAIResponse(text, file);
+      const response = await fetchAIResponse(
+        conversationIdRef.current,
+        text,
+        file,
+      );
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === thinkingId
@@ -70,6 +77,7 @@ export function useChatMessages() {
     attachedFile?: UploadedFile | null,
   ) => {
     messageIdRef.current = 0;
+    conversationIdRef.current = crypto.randomUUID();
     const userMsg: Message = {
       id: ++messageIdRef.current,
       text: firstMessage,

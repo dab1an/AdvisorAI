@@ -8,8 +8,9 @@ namespace server.Services;
 public class ChatService : IChatService
 {
     private readonly IChatCompletionService _chat;
+    private readonly IChatHistoryStore _historyStore;
 
-    public ChatService(IConfiguration configuration)
+    public ChatService(IConfiguration configuration, IChatHistoryStore historyStore)
     {
         string apiKey = configuration["OPENAI_API_KEY"]
             ?? throw new InvalidOperationException("OPENAI_API_KEY is not configured.");
@@ -19,12 +20,14 @@ public class ChatService : IChatService
             .Build();
 
         _chat = kernel.GetRequiredService<IChatCompletionService>();
+        _historyStore = historyStore;
     }
 
-    public async Task<string> GetResponseAsync(string userMessage, IFormFile? file = null)
+    public async Task<string> GetResponseAsync(string conversationId, string userMessage, IFormFile? file = null)
     {
-        ChatHistory history = new ChatHistory();
-        ChatMessageContentItemCollection items = new ChatMessageContentItemCollection { new TextContent(userMessage) };
+        ChatHistory history = await _historyStore.GetHistoryAsync(conversationId);
+
+        string fullUserText = userMessage;
 
         if (file is not null)
         {
@@ -32,19 +35,38 @@ public class ChatService : IChatService
             {
                 using MemoryStream ms = new MemoryStream();
                 await file.CopyToAsync(ms);
-                items.Add(new ImageContent(ms.ToArray(), file.ContentType));
+
+                // send image to the model for this request
+                ChatMessageContentItemCollection items = new ChatMessageContentItemCollection
+                {
+                    new TextContent(userMessage),
+                    new ImageContent(ms.ToArray(), file.ContentType)
+                };
+                history.AddUserMessage(items);
             }
             else if (file.ContentType is "application/pdf")
             {
                 string pdfText = ExtractPdfText(file);
-                items.Add(new TextContent($"\n\n--- Attached PDF content ---\n{pdfText}"));
+                fullUserText = $"{userMessage}\n\n--- Attached PDF content ---\n{pdfText}";
+                history.AddUserMessage(fullUserText);
+            }
+            else
+            {
+                history.AddUserMessage(userMessage);
             }
         }
-
-        history.AddUserMessage(items);
+        else
+        {
+            history.AddUserMessage(userMessage);
+        }
 
         ChatMessageContent result = await _chat.GetChatMessageContentAsync(history);
-        return result.Content ?? "Sorry, I couldn't generate a response.";
+        string responseText = result.Content ?? "Sorry, I couldn't generate a response.";
+
+        history.AddAssistantMessage(responseText);
+        await _historyStore.SaveHistoryAsync(conversationId, history);
+
+        return responseText;
     }
 
     // this will be a placeholder until we settle on how to handle detecting that a pdf is specifically an audit 
