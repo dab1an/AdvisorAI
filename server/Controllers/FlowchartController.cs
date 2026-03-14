@@ -6,10 +6,10 @@ namespace server.Controllers;
 
 [Route("api/flowchart")]
 [ApiController]
-public class FlowchartController(IFlowchartParserService flowchartParserService) : ControllerBase
+public class FlowchartController(IFlowchartParserService flowchartParserService, IEmbeddingService embeddingService) : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult<FlowchartCurriculum>> GetFlowchartInfo(
+    public async Task<ActionResult<FlowchartCurriculum>> UploadFlowchartInfoAsync(
         List<IFormFile> files)
     {
         var images = new List<(byte[], string)>();
@@ -25,8 +25,8 @@ public class FlowchartController(IFlowchartParserService flowchartParserService)
             images.Add((ms.ToArray(), file.ContentType));
         }
 
-        FlowchartCurriculum response = await flowchartParserService.ParseFlowchartAsync(images);
-
-        return Ok(response);
+        FlowchartCurriculum result = await flowchartParserService.ParseFlowchartAsync(images);
+        await embeddingService.UpsertFlowchartAsync(result);
+        return Ok(result);
     }
 }

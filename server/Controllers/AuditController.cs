@@ -12,9 +12,7 @@ public class AuditController(IAuditParserService auditParserService) : Controlle
     public ActionResult<IEnumerable<AuditSection>> GetAuditInfo(IFormFile file)
     {
         Stream stream = file.OpenReadStream();
-        
         IEnumerable<AuditSection> auditRequirements = auditParserService.Parse(stream);
-        
         return Ok(auditRequirements);
     }
 }
