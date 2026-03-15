@@ -5,5 +5,5 @@ namespace server.Services;
 
 public interface IAuditParserService
 {
-    public List<AuditSection> Parse(Stream pdfStream);
+    public Audit Parse(Stream pdfStream);
 }

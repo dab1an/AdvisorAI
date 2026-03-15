@@ -45,7 +45,7 @@ public class AuditParserService : IAuditParserService
 
     private static readonly Regex CourseRegex = new(@"^[A-Z]{3}\d{4}");
 
-    public List<AuditSection> Parse(Stream pdfStream)
+    public Audit Parse(Stream pdfStream)
     {
         PdfDocument pdf = PdfDocument.Open(pdfStream);
 
@@ -118,7 +118,7 @@ public class AuditParserService : IAuditParserService
             }
         }
 
-        return sections;
+        return new Audit { Sections = sections };
     }
 
     private static Course? ParseCourse(string line)

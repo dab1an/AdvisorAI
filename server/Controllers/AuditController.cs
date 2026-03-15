@@ -9,10 +9,10 @@ namespace server.Controllers;
 public class AuditController(IAuditParserService auditParserService) : ControllerBase
 {
     [HttpPost("upload")]
-    public ActionResult<IEnumerable<AuditSection>> GetAuditInfo(IFormFile file)
+    public ActionResult<Audit> GetAuditInfo(IFormFile file)
     {
         Stream stream = file.OpenReadStream();
-        IEnumerable<AuditSection> auditRequirements = auditParserService.Parse(stream);
+        Audit auditRequirements = auditParserService.Parse(stream);
         return Ok(auditRequirements);
     }
 }

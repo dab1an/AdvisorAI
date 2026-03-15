@@ -127,32 +127,8 @@ public class ChatService : IChatService
                 if (fileType == "audit")
                 {
                     using Stream auditStream = file.OpenReadStream();
-                    List<AuditSection> auditSections = _auditParserService.Parse(auditStream);
-
-                    StringBuilder auditBuilder = new StringBuilder();
-                    auditBuilder.AppendLine("--- Student Audit ---");
-
-                    foreach (AuditSection section in auditSections)
-                    {
-                        auditBuilder.AppendLine(
-                            $"Section: {section.Title} " +
-                            $"({(section.IsSatisfied ? "Satisfied" : "Not Satisfied")})");
-
-                        foreach (AuditRequirement req in section.Requirements)
-                        {
-                            auditBuilder.AppendLine(
-                                $"  Requirement: {req.Title} " +
-                                $"({(req.IsSatisfied ? "Satisfied" : "Not Satisfied")})");
-
-                            if (req.CoursesTaken.Any())
-                            {
-                                string courses = string.Join(", ", req.CoursesTaken.Select(c => c.ToString()));
-                                auditBuilder.AppendLine($"  Courses taken: {courses}");
-                            }
-                        }
-                    }
-
-                    pdfContext = auditBuilder.ToString();
+                    Audit auditContent = _auditParserService.Parse(auditStream);
+                    pdfContext = auditContent.ToString();
                 }
                 else
                 {
