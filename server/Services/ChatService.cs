@@ -69,6 +69,8 @@ public class ChatService : IChatService
         - Recommended next courses should include only courses that are not satisfied and not currently in progress.
         - Format bullet points as `**Lead Detail:** supporting explanation` when possible.
         - Remaining requirement notes should mention only requirements that are explicitly not satisfied, while noting any in-progress components only as actively being addressed.
+        - If there are no remaining requirements or no valid recommended next courses, clearly say that the student may be close to graduation completion.
+        - In that case, the next steps should suggest confirming degree completion with an academic advisor and considering graduation application or graduation clearance steps if appropriate.
         - End the response with one short closing sentence inviting follow-up questions.
         - Focus on class planning first.
         - Do not switch into general-advising format for audit questions.
