@@ -48,39 +48,33 @@ public class ChatService : IChatService
         OUTPUT FORMAT:
 
         AUDIT-PLANNING MODE:
-        Return markdown only, but do not print visible labels or section headings.
+        Return markdown only, but do not print visible section headings.
 
         Structure the response in this exact order:
-        1) A short summary in 2-4 sentences.
-        2) Current in-progress courses as bullet points.
-           - Format each bullet as `**Lead Detail:** supporting explanation`.
-           - Include only courses that are currently in progress.
-        3) Recommended next courses as bullet points.
-           - Format each bullet as `**Lead Detail:** supporting explanation`.
-           - Include only courses that are not satisfied and not currently in progress.
-           - Each bullet should include course code, title, credits, and a short reason.
-           - If no reliable next-course recommendation can be made, clearly explain why.
-        4) Remaining requirement notes as concise bullet points.
-           - Format each bullet as `**Lead Detail:** supporting explanation`.
-           - Mention any remaining track or degree requirements that are explicitly not satisfied.
-           - If parts of the degree are in progress, mention that they are actively being addressed without treating them as unmet next-course recommendations.
-        5) Next steps as concise bullet points.
-           - Format each bullet as `**Lead Detail:** supporting explanation`.
-           - Next steps can include enrolling in recommended next courses, confirming degree progress, or reaching out to an advisor when clarification is needed.
-           - If records are missing or unclear, say what the student should upload or clarify.
+        1) A short summary paragraph.
+        2) A bolded lead-in for current in-progress courses, followed by bullet points.
+        3) A bolded lead-in for recommended next courses, followed by bullet points.
+        4) A bolded lead-in for remaining requirement notes, followed by bullet points.
+        5) A bolded lead-in for next steps, followed by bullet points.
         6) A short closing sentence.
 
         Audit-planning rules:
-        - Keep the structure strict and predictable, but do not display labels such as Summary, Current In-Progress Courses, Recommended Next Courses, Remaining Requirement Notes, Next Steps, or Closing.
-        - List in-progress courses only in the in-progress section.
-        - Recommended next courses must be neither satisfied nor in progress.
-        - Do not repeat in-progress courses or in-progress requirements as unmet next-course recommendations.
-        - In remaining requirement notes, mention only requirements that are explicitly not satisfied, while noting any in-progress components only as actively being addressed.
+        - Use bolded lead-ins in this style:
+          `**Based on your degree audit:**`
+          `**You currently have courses in progress:**`
+          `**Recommended next courses:**`
+          `**Remaining requirements:**`
+          `**Next steps:**`
+        - Current in-progress courses should include only courses that are currently in progress.
+        - Recommended next courses should include only courses that are not satisfied and not currently in progress.
+        - Format bullet points as `**Lead Detail:** supporting explanation` when possible.
+        - Remaining requirement notes should mention only requirements that are explicitly not satisfied, while noting any in-progress components only as actively being addressed.
+        - End the response with one short closing sentence inviting follow-up questions.
         - Focus on class planning first.
         - Do not switch into general-advising format for audit questions.
 
         GENERAL-ADVISING MODE:
-        Return markdown only, but do not print visible labels or section headings.
+        Return markdown only, but do not print visible section headings.
 
         Structure the response in this exact order:
         1) One short direct answer paragraph.
