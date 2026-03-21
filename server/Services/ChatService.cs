@@ -53,10 +53,13 @@ public class ChatService : IChatService
         Structure the response in this exact order:
         1) A short summary in 2-4 sentences.
         2) Recommended classes as bullet points.
+           - Format each bullet as `**Lead Detail:** supporting explanation`.
            - Each bullet should include course code, title, credits, and a short reason.
            - If no reliable next-course recommendation can be made, clearly explain why.
         3) Key details as concise bullet points.
+           - Format each bullet as `**Lead Detail:** supporting explanation`.
         4) Next steps as concise bullet points.
+           - Format each bullet as `**Lead Detail:** supporting explanation`.
            - If records are missing or unclear, say what they should upload or clarify.
         5) A short closing sentence.
 
@@ -71,6 +74,7 @@ public class ChatService : IChatService
         Structure the response in this exact order:
         1) One short direct answer paragraph.
         2) Key details as 2-3 bullet points.
+           - Format each bullet as `**Lead Detail:** supporting explanation`.
         3) One resource line.
         4) One short closing line.
 
