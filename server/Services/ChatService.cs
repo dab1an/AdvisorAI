@@ -52,7 +52,7 @@ public class ChatService : IChatService
 
         Structure the response in this exact order:
         1) A short summary paragraph.
-        2) A bolded lead-in for current in-progress courses, followed by bullet points.
+        2) A bolded lead-in for current in-progress courses, followed by plain bullet points with course names only.
         3) A bolded lead-in for recommended next courses, followed by bullet points.
         4) A bolded lead-in for remaining requirement notes, followed by bullet points.
         5) A bolded lead-in for next steps, followed by bullet points.
@@ -65,7 +65,7 @@ public class ChatService : IChatService
           `**Recommended next courses:**`
           `**Remaining requirements:**`
           `**Next steps:**`
-        - Current in-progress courses should include only courses that are currently in progress.
+        - Current in-progress courses should include only courses that are currently in progress and should be listed as plain bullet points without a trailing colon unless explanatory text follows.
         - Treat currently in-progress courses as already being counted toward degree completion for planning purposes.
         - Do not recommend in-progress courses again as future courses.
         - Recommended next courses should include only courses that are not satisfied and not currently in progress.
