@@ -1,4 +1,6 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
 import type { Message } from "../../../hooks/useChatMessages";
 import FilePreview from "./FilePreview";
 import ThinkingIndicator from "./ThinkingIndicator";
@@ -7,6 +9,24 @@ interface ChatMessagesProps {
   messages: Message[];
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
 }
+
+const markdownComponents: Components = {
+  p: ({ children }) => <p className="mb-4 last:mb-0">{children}</p>,
+  ul: ({ children }) => <ul className="mb-4 list-disc pl-5 last:mb-0">{children}</ul>,
+  ol: ({ children }) => <ol className="mb-4 list-decimal pl-5 last:mb-0">{children}</ol>,
+  li: ({ children }) => <li className="mb-1">{children}</li>,
+  a: ({ href, children }) => (
+    <a
+      href={href}
+      className="text-blue-600 underline hover:text-blue-800"
+      target="_blank"
+      rel="noreferrer"
+    >
+      {children}
+    </a>
+  ),
+  strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+};
 
 const ChatMessages = ({ messages, messagesEndRef }: ChatMessagesProps) => (
   <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-8 py-6 no-scrollbar">
@@ -27,7 +47,7 @@ const ChatMessages = ({ messages, messagesEndRef }: ChatMessagesProps) => (
             </div>
           ) : (
             <div className="animate-slide-up max-w-xl text-sm leading-relaxed text-gray-800">
-              {msg.text}
+              <ReactMarkdown components={markdownComponents}>{msg.text}</ReactMarkdown>
             </div>
           )}
           {msg.attachedFile && (
