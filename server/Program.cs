@@ -19,7 +19,7 @@ builder.Services.AddScoped<IFlowchartParserService, FlowchartParserService>();
 builder.Services.AddScoped<IEmbeddingService, EmbeddingService>();
 builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddSingleton<IChatHistoryStore, RedisChatHistoryStore>();
-
+builder.Services.AddHostedService <ReferenceDataSeeder>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
