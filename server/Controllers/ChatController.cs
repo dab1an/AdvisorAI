@@ -20,7 +20,7 @@ public class ChatController(IChatService chatService) : ControllerBase
         if (string.IsNullOrWhiteSpace(conversationId))
             return BadRequest("Conversation ID is required.");
 
-        string response = await chatService.GetResponseAsync(conversationId, message, file, fileType);
+        string response = await chatService.GetResponseAsync(conversationId, message, file);
         return Ok(new { response }); // we should always serialize as an object, not raw JSON string
     }
 }
