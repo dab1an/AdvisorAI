@@ -5,12 +5,28 @@ import fiu_logo from "../../../assets/fiu_logo_hrz.png";
 import SidebarSection from "./SidebarSection";
 import NewChatButton from "./NewChatButton";
 
-const Sidebar = () => {
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   return (
-    <div
-      className="flex h-full w-80 flex-col items-center justify-between bg-cover bg-bottom-right bg-no-repeat px-6 py-8"
-      style={{ backgroundImage: `url(${sidebar_bg})` }}
-    >
+    <>
+      {/* Mobile backdrop */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/40 md:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      <div
+        className={`fixed inset-y-0 left-0 z-40 flex h-full w-72 flex-col items-center justify-between bg-cover bg-bottom-right bg-no-repeat px-6 py-8 transition-transform duration-300
+          md:relative md:translate-x-0 md:w-80
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+        style={{ backgroundImage: `url(${sidebar_bg})` }}
+      >
       <div className="flex w-full flex-col items-center gap-8 hover:cursor-default">
         <span className="flex w-full items-center justify-center gap-3">
           <img src={brain} alt="AdvisorAI Brain Icon" className="h-10" />
@@ -57,6 +73,7 @@ const Sidebar = () => {
 
       <img src={fiu_logo} alt="FIU Logo" className="h-24" />
     </div>
+    </>
   );
 };
 

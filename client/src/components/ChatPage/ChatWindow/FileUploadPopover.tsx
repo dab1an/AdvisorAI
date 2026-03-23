@@ -61,7 +61,7 @@ const FileUploadPopover = ({
       onClick={onClose}
     >
       <div
-        className="relative w-[480px] rounded-2xl bg-white p-8 shadow-xl"
+        className="relative w-[90vw] max-w-[480px] rounded-2xl bg-white p-6 md:p-8 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
