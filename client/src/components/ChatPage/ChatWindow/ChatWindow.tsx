@@ -12,7 +12,11 @@ import type { UploadedFile } from "./FileUploadPopover";
 
 import { CYCLING_WORDS, WORD_INTERVAL_MS } from "../../../hooks/chat";
 
-const ChatWindow = () => {
+interface ChatWindowProps {
+  onMenuClick: () => void;
+}
+
+const ChatWindow = ({ onMenuClick }: ChatWindowProps) => {
   const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [showUploadPopover, setShowUploadPopover] = useState(false);
@@ -60,6 +64,17 @@ const ChatWindow = () => {
 
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden bg-white">
+      {/* Hamburger button — mobile only */}
+      <button
+        onClick={onMenuClick}
+        className="absolute top-4 left-4 z-20 flex flex-col gap-1 p-1 md:hidden"
+        aria-label="Open menu"
+      >
+        <span className="block h-0.5 w-5 bg-gray-600" />
+        <span className="block h-0.5 w-5 bg-gray-600" />
+        <span className="block h-0.5 w-5 bg-gray-600" />
+      </button>
+
       {showUploadPopover && (
         <FileUploadPopover
           onClose={() => setShowUploadPopover(false)}
@@ -79,7 +94,7 @@ const ChatWindow = () => {
           onRemoveFile={() => setUploadedFile(null)}
         />
       ) : (
-        <div className="flex h-full flex-col px-20">
+        <div className="flex h-full flex-col px-4 md:px-20">
           <ChatMessages messages={messages} messagesEndRef={messagesEndRef} />
           <div className="px-8 pt-2 pb-6">
             {uploadedFile && (

@@ -24,10 +24,10 @@ const PreChatScreen = ({
   uploadedFile,
   onRemoveFile,
 }: PreChatScreenProps) => (
-  <div className="flex h-full flex-col items-center justify-center gap-10 px-8">
-    <div className="font-instrument flex items-baseline gap-2 select-none">
-      <h1 className="text-app-blue text-6xl font-normal">Need Info on</h1>
-      <span className="text-app-gold inline-block text-6xl font-normal">
+  <div className="flex h-full flex-col items-center justify-center gap-10 px-8 pt-14 md:pt-0">
+    <div className="font-instrument flex flex-wrap items-baseline justify-center gap-2 select-none text-center">
+      <h1 className="text-app-blue text-4xl md:text-6xl font-normal">Need Info on</h1>
+      <span className="text-app-gold inline-block text-4xl md:text-6xl font-normal">
         <p>{currentWord}?</p>
       </span>
     </div>

@@ -38,7 +38,7 @@ const ChatMessages = ({ messages, messagesEndRef }: ChatMessagesProps) => (
           className={`flex flex-col gap-1.5 ${isUser ? "items-end" : "items-start"}`}
         >
           {isUser ? (
-            <div className="animate-slide-up max-w-sm rounded-2xl rounded-tr-sm bg-gray-100 px-4 py-3 text-sm leading-relaxed text-gray-800">
+            <div className="animate-slide-up max-w-[80%] md:max-w-sm rounded-2xl rounded-tr-sm bg-gray-100 px-4 py-3 text-sm leading-relaxed text-gray-800">
               {msg.text}
             </div>
           ) : msg.loading ? (
