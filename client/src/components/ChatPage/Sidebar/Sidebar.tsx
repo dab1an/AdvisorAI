@@ -1,5 +1,5 @@
 import sidebar_bg from "../../../assets/sidebar_bg.png";
-import brain from "../../../assets/brain_icon.png";
+import brain from "../../../assets/Cap2.png";
 import fiu_logo from "../../../assets/fiu_logo_hrz.png";
 
 import SidebarSection from "./SidebarSection";
