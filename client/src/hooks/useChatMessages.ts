@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type { UploadedFile } from "../components/ChatPage/ChatWindow/FileUploadPopover";
 
 export interface Message {
@@ -91,5 +91,11 @@ export function useChatMessages() {
     sendAndGetResponse(firstMessage, attachedFile?.file, attachedFile?.fileType);
   };
 
-  return { messages, addMessage, resetMessages };
+  const startNewChat = useCallback(() => {
+    messageIdRef.current = 0;
+    conversationIdRef.current = crypto.randomUUID();
+    setMessages([]);
+  }, []);
+
+  return { messages, addMessage, resetMessages, startNewChat };
 }
