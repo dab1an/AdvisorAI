@@ -14,16 +14,17 @@ import { CYCLING_WORDS, WORD_INTERVAL_MS } from "../../../hooks/chat";
 
 interface ChatWindowProps {
   onMenuClick: () => void;
+  newChatSignal: number;
 }
 
-const ChatWindow = ({ onMenuClick }: ChatWindowProps) => {
+const ChatWindow = ({ onMenuClick, newChatSignal }: ChatWindowProps) => {
   const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [showUploadPopover, setShowUploadPopover] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { messages, addMessage, resetMessages } = useChatMessages();
+  const { messages, addMessage, resetMessages, startNewChat } = useChatMessages();
 
   const { index } = useCyclingWords(
     CYCLING_WORDS,
@@ -36,6 +37,14 @@ const ChatWindow = ({ onMenuClick }: ChatWindowProps) => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages, hasSentFirstMessage]);
+
+  useEffect(() => {
+    setHasSentFirstMessage(false);
+    setInputValue("");
+    setShowUploadPopover(false);
+    setUploadedFile(null);
+    startNewChat();
+  }, [newChatSignal, startNewChat]);
 
   const handleSend = () => {
     const trimmed = inputValue.trim();

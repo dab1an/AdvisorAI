@@ -8,9 +8,10 @@ import NewChatButton from "./NewChatButton";
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  onNewChat: () => void;
 }
 
-const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+const Sidebar = ({ isOpen, onClose, onNewChat }: SidebarProps) => {
   return (
     <>
       {/* Mobile backdrop */}
@@ -68,7 +69,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           ]}
         />
 
-        <NewChatButton />
+        <NewChatButton onClick={onNewChat} />
       </div>
 
       <img src={fiu_logo} alt="FIU Logo" className="h-24" />
