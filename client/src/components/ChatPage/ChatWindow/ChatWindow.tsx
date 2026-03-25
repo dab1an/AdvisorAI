@@ -13,12 +13,22 @@ import type { UploadedFile } from "./FileUploadPopover";
 
 import { CYCLING_WORDS, WORD_INTERVAL_MS } from "../../../hooks/chat";
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+const ChatWindow = () => {
+=======
+>>>>>>> ff84053 (New Chat button functionality)
 interface ChatWindowProps {
   onMenuClick: () => void;
   newChatSignal: number;
 }
 
 const ChatWindow = ({ onMenuClick, newChatSignal }: ChatWindowProps) => {
+<<<<<<< HEAD
+=======
+>>>>>>> a59bb79 (New Chat button functionality)
+>>>>>>> ff84053 (New Chat button functionality)
   const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [showUploadPopover, setShowUploadPopover] = useState(false);
