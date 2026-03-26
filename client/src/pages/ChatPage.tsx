@@ -1,4 +1,3 @@
-import "../index.css";
 import { useState } from "react";
 
 import Sidebar from "../components/ChatPage/Sidebar/Sidebar";

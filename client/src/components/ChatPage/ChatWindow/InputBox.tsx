@@ -1,11 +1,11 @@
-import React from "react";
+import type { KeyboardEvent } from "react";
 import AttachmentIcon from "../../../assets/icons/AttachmentIcon";
 import SendIcon from "../../../assets/icons/SendIcon";
 
-export interface InputBoxProps {
+interface InputBoxProps {
   value: string;
   onChange: (v: string) => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  onKeyDown: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
   onSend: () => void;
   placeholder: string;
   onAttachClick: () => void;
@@ -19,9 +19,9 @@ const InputBox = ({
   placeholder,
   onAttachClick,
 }: InputBoxProps) => (
-  <div className="relative w-full rounded-2xl border border-gray-200 bg-white px-4 pt-3 pb-12 shadow-sm">
+  <div className="relative w-full rounded-2xl border border-gray-200 bg-white px-4 pt-3 pb-12 shadow-sm dark-glass">
     <textarea
-      className="w-full resize-none bg-transparent text-sm leading-relaxed text-gray-700 placeholder-gray-300 outline-none no-scrollbar"
+      className="w-full resize-none bg-transparent text-sm leading-relaxed text-gray-700 dark:text-gray-200 placeholder-gray-300 dark:placeholder-slate-500 outline-none no-scrollbar"
       rows={2}
       placeholder={placeholder}
       value={value}
@@ -32,7 +32,7 @@ const InputBox = ({
     <div className="absolute right-3 bottom-3 flex items-center gap-2">
       <button
         onClick={onAttachClick}
-        className="p-1 transition-colors text-app-blue hover:text-gray-600"
+        className="p-1 transition-colors text-app-blue dark:text-gray-200 hover:text-gray-600 dark:hover:text-white"
         aria-label="Attach file"
       >
         <AttachmentIcon />
@@ -41,7 +41,7 @@ const InputBox = ({
       <button
         onClick={onSend}
         disabled={!value.trim()}
-        className="flex bg-app-blue rounded-xl p-2 text-white transition-all hover:opacity-90 cursor-pointer disabled:opacity-40 justify-center items-center"
+        className="flex bg-app-blue dark:bg-app-gold rounded-xl p-2 text-white transition-colors hover:opacity-90 cursor-pointer disabled:opacity-40 justify-center items-center"
         aria-label="Send"
       >
         <SendIcon />

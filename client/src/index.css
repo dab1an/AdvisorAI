@@ -9,6 +9,7 @@
 
 html, body {
   background-color: #000;
+  color-scheme: light dark;
 }
 
 .liquid-glass {
@@ -32,6 +33,50 @@ html, body {
     0 0 25px rgba(182, 134, 44, 0.35),
     0 0 50px rgba(182, 134, 44, 0.15);
   transform: scale(1.03);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark-glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 40%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+      0 4px 30px rgba(0, 0, 0, 0.15);
+  }
+}
+
+
+/* Speech-bubble tail — uses the same glass surface as the parent */
+.speech-bubble {
+  position: relative;
+  overflow: visible;
+}
+
+.speech-bubble::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 22px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: white;
+  border-left: 1px solid #e5e7eb;
+  border-top: 1px solid #e5e7eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  .speech-bubble::before {
+    background: #1a2535;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .no-scrollbar {
