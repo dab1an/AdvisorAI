@@ -1,4 +1,4 @@
-import React from "react";
+import type { RefObject } from "react";
 import ReactMarkdown from "react-markdown";
 import type { Components } from "react-markdown";
 import type { Message } from "../../../hooks/useChatMessages";
@@ -7,7 +7,7 @@ import ThinkingIndicator from "./ThinkingIndicator";
 
 interface ChatMessagesProps {
   messages: Message[];
-  messagesEndRef: React.RefObject<HTMLDivElement | null>;
+  messagesEndRef: RefObject<HTMLDivElement | null>;
 }
 
 const markdownComponents: Components = {
@@ -18,7 +18,7 @@ const markdownComponents: Components = {
   a: ({ href, children }) => (
     <a
       href={href}
-      className="text-blue-600 underline hover:text-blue-800"
+      className="text-blue-600 underline hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
       target="_blank"
       rel="noreferrer"
     >
@@ -38,7 +38,7 @@ const ChatMessages = ({ messages, messagesEndRef }: ChatMessagesProps) => (
           className={`flex flex-col gap-1.5 ${isUser ? "items-end" : "items-start"}`}
         >
           {isUser ? (
-            <div className="animate-slide-up max-w-[80%] md:max-w-sm rounded-2xl rounded-tr-sm bg-gray-100 px-4 py-3 text-sm leading-relaxed text-gray-800">
+            <div className="animate-slide-up max-w-[80%] md:max-w-sm rounded-2xl rounded-tr-sm bg-gray-100 px-4 py-3 text-sm leading-relaxed text-gray-800 dark:text-gray-200 dark-glass">
               {msg.text}
             </div>
           ) : msg.loading ? (
@@ -46,7 +46,7 @@ const ChatMessages = ({ messages, messagesEndRef }: ChatMessagesProps) => (
               <ThinkingIndicator />
             </div>
           ) : (
-            <div className="animate-slide-up max-w-xl text-sm leading-relaxed text-gray-800">
+            <div className="animate-slide-up max-w-xl text-sm leading-relaxed text-gray-800 dark:text-gray-200">
               <ReactMarkdown components={markdownComponents}>{msg.text}</ReactMarkdown>
             </div>
           )}

@@ -7,6 +7,7 @@ import PreChatScreen from "./PreChatScreen";
 import ChatMessages from "./ChatMessages";
 import InputBox from "./InputBox";
 import FileUploadPopover from "./FileUploadPopover";
+import DegreeAuditModal from "./DegreeAuditModal";
 import FilePreview from "./FilePreview";
 import type { UploadedFile } from "./FileUploadPopover";
 
@@ -21,6 +22,7 @@ const ChatWindow = ({ onMenuClick, newChatSignal }: ChatWindowProps) => {
   const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [showUploadPopover, setShowUploadPopover] = useState(false);
+  const [showAuditGuide, setShowAuditGuide] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -72,21 +74,28 @@ const ChatWindow = ({ onMenuClick, newChatSignal }: ChatWindowProps) => {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col overflow-hidden bg-white">
+    <div className="relative flex h-full w-full flex-col overflow-hidden bg-white dark:bg-slate-950">
       {/* Hamburger button — mobile only */}
       <button
         onClick={onMenuClick}
         className="absolute top-4 left-4 z-20 flex flex-col gap-1 p-1 md:hidden"
         aria-label="Open menu"
       >
-        <span className="block h-0.5 w-5 bg-gray-600" />
-        <span className="block h-0.5 w-5 bg-gray-600" />
-        <span className="block h-0.5 w-5 bg-gray-600" />
+        <span className="block h-0.5 w-5 bg-gray-600 dark:bg-gray-300" />
+        <span className="block h-0.5 w-5 bg-gray-600 dark:bg-gray-300" />
+        <span className="block h-0.5 w-5 bg-gray-600 dark:bg-gray-300" />
       </button>
 
       {showUploadPopover && (
         <FileUploadPopover
           onClose={() => setShowUploadPopover(false)}
+          onFileSelect={(f) => setUploadedFile(f)}
+        />
+      )}
+
+      {showAuditGuide && (
+        <DegreeAuditModal
+          onClose={() => setShowAuditGuide(false)}
           onFileSelect={(f) => setUploadedFile(f)}
         />
       )}
@@ -99,6 +108,7 @@ const ChatWindow = ({ onMenuClick, newChatSignal }: ChatWindowProps) => {
           onSend={handleSend}
           onKeyDown={handleKeyDown}
           onAttachClick={() => setShowUploadPopover(true)}
+          onGuideClick={() => setShowAuditGuide(true)}
           uploadedFile={uploadedFile}
           onRemoveFile={() => setUploadedFile(null)}
         />

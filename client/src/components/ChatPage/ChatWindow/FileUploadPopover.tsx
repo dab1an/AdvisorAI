@@ -22,6 +22,7 @@ const FileUploadPopover = ({
 }: FileUploadPopoverProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedType, setSelectedType] = useState<"audit" | "document">("audit");
+  const [showGuide, setShowGuide] = useState(false);
 
   const processFile = useCallback(
   (file: File) => {
@@ -61,67 +62,116 @@ const FileUploadPopover = ({
       onClick={onClose}
     >
       <div
-        className="relative w-[90vw] max-w-[480px] rounded-2xl bg-white p-6 md:p-8 shadow-xl"
+        className="relative w-[90vw] max-w-[480px] rounded-2xl bg-white p-6 md:p-8 shadow-xl dark-glass"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors cursor-pointer"
           aria-label="Close"
         >
           <CloseModalIcon />
         </button>
 
-        <h2 className="mb-5 text-xl font-semibold text-gray-900">
-          File Upload
-        </h2>
+        {showGuide ? (
+          <>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Upload Your Degree Audit
+            </h2>
+            <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
+              Get personalized advising based on your academic progress
+            </p>
+            <ol className="mt-5 space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <li>
+                1. Go to{" "}
+                <a
+                  href="https://my.fiu.edu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-app-gold hover:underline"
+                >
+                  MyFIU
+                </a>
+              </li>
+              <li>2. Navigate to Academic Advising, then Degree Audit</li>
+              <li>3. Download your audit as a PDF</li>
+            </ol>
+            <button
+              onClick={() => {
+                setShowGuide(false);
+                inputRef.current?.click();
+              }}
+              className="mt-6 w-full rounded-xl bg-app-blue py-3 text-sm font-semibold text-white transition-colors hover:bg-app-blue/90 cursor-pointer"
+            >
+              Upload Degree Audit
+            </button>
+          </>
+        ) : (
+          <>
+            <h2 className="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
+              File Upload
+            </h2>
 
-        <div className="mb-5 flex gap-6">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              name="fileType"
-              value="audit"
-              checked={selectedType === "audit"}
-              onChange={() => setSelectedType("audit")}
-              className="accent-app-blue"
-            />
-            <span className="text-sm text-gray-700">Degree Audit</span>
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              name="fileType"
-              value="document"
-              checked={selectedType === "document"}
-              onChange={() => setSelectedType("document")}
-              className="accent-app-blue"
-            />
-            <span className="text-sm text-gray-700">Other Document</span>
-          </label>
-        </div>
+            <div className="mb-5 flex gap-6">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="fileType"
+                  value="audit"
+                  checked={selectedType === "audit"}
+                  onChange={() => setSelectedType("audit")}
+                  className="accent-app-blue"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">Degree Audit</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="fileType"
+                  value="document"
+                  checked={selectedType === "document"}
+                  onChange={() => setSelectedType("document")}
+                  className="accent-app-blue"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">Other Document</span>
+              </label>
+            </div>
 
-        <div
-          className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 py-14 transition-colors hover:bg-gray-100"
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onClick={() => inputRef.current?.click()}
-        >
-          <UploadImageIcon />
-          <span className="text-sm font-medium text-gray-400">
-            Drag and drop or click here
-          </span>
-        </div>
+            <div
+              className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-gray-200 dark:border-slate-600 bg-gray-50 dark:bg-slate-800 py-14 transition-colors hover:bg-gray-100 dark:hover:bg-slate-700"
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+              onClick={() => inputRef.current?.click()}
+            >
+              <UploadImageIcon />
+              <span className="text-sm font-medium text-gray-400 dark:text-slate-400">
+                Drag and drop or click here
+              </span>
+            </div>
 
-        <p className="mt-4 text-center text-xs text-gray-400">
-          Accepted file types:{" "}
-          {ACCEPTED_LABEL.split(", ").map((t, i) => (
-            <span key={t}>
-              {i > 0 && ", "}
-              <span className="text-blue-500">{t}</span>
-            </span>
-          ))}
-        </p>
+            <p className="mt-4 text-center text-xs text-gray-400 dark:text-slate-400">
+              Accepted file types:{" "}
+              {ACCEPTED_LABEL.split(", ").map((t, i) => (
+                <span key={t}>
+                  {i > 0 && ", "}
+                  <span className="text-blue-500 dark:text-blue-400">{t}</span>
+                </span>
+              ))}
+            </p>
+
+            {selectedType === "audit" && (
+              <p className="mt-4 text-center text-xs text-gray-400 dark:text-slate-400">
+                Don't have your audit yet?{" "}
+                <button
+                  onClick={() => setShowGuide(true)}
+                  className="font-medium text-app-blue dark:text-app-gold hover:underline cursor-pointer"
+                >
+                  Need personalized help? Learn how!
+                </button>
+              </p>
+            )}
+          </>
+        )}
 
         <input
           ref={inputRef}

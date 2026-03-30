@@ -1,4 +1,3 @@
-import React from "react";
 import arrow_link from "../../../assets/external_link_arrow.png";
 
 interface SidebarLinkProps {
@@ -6,7 +5,7 @@ interface SidebarLinkProps {
   text: string;
 }
 
-const SidebarLink: React.FC<SidebarLinkProps> = ({ link, text }) => {
+const SidebarLink = ({ link, text }: SidebarLinkProps) => {
   return (
     <div>
       <a
