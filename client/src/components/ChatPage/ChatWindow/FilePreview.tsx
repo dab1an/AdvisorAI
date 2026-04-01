@@ -8,7 +8,7 @@ interface FilePreviewProps {
 }
 
 const FilePreview = ({ uploadedFile, onRemove }: FilePreviewProps) => (
-  <div className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 shadow-sm">
+  <div className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:text-gray-300 shadow-sm dark-glass">
     {uploadedFile.previewUrl ? (
       <img
         src={uploadedFile.previewUrl}
@@ -16,7 +16,7 @@ const FilePreview = ({ uploadedFile, onRemove }: FilePreviewProps) => (
         className="h-8 w-8 rounded object-cover"
       />
     ) : (
-      <div className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
+      <div className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-700">
         <FileIcon />
       </div>
     )}
@@ -24,7 +24,7 @@ const FilePreview = ({ uploadedFile, onRemove }: FilePreviewProps) => (
     {onRemove && (
       <button
         onClick={onRemove}
-        className="ml-1 text-gray-400 hover:text-gray-600 transition-colors"
+        className="ml-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
         aria-label="Remove file"
       >
         <RemoveIcon />

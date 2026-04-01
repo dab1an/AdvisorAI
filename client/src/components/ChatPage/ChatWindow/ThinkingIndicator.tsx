@@ -7,9 +7,9 @@ const ThinkingIndicator = () => (
       {bars.map((bar, i) => (
         <div
           key={i}
-          className={`${bar.width} h-3 rounded-full bg-gray-200 overflow-hidden`}
+          className={`${bar.width} h-3 rounded-full bg-gray-200 dark:bg-slate-800 overflow-hidden`}
         >
-          <div className="h-full w-full animate-shimmer rounded-full bg-linear-to-r from-gray-200 via-gray-100 to-gray-200 bg-size-[200%_100%]" />
+          <div className="h-full w-full animate-shimmer rounded-full bg-linear-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 bg-size-[200%_100%]" />
         </div>
       ))}
     </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import SidebarLink from "./SidebarLink";
 
 interface SidebarSectionProps {
@@ -9,7 +8,7 @@ interface SidebarSectionProps {
   }[];
 }
 
-const SidebarSection: React.FC<SidebarSectionProps> = ({ title, links }) => {
+const SidebarSection = ({ title, links }: SidebarSectionProps) => {
   return (
     <div className="flex w-full flex-col gap-3">
       <h2 className="text-app-yellow text-md font-bold underline">{title}</h2>
