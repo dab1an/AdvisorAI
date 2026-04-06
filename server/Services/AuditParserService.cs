@@ -109,10 +109,13 @@ public class AuditParserService : IAuditParserService
                 if (CourseRegex.IsMatch(line) && currentRequirement != null)
                 {
                     Course? course = ParseCourse(line);
-
                     if (course != null)
-                        currentRequirement.CoursesTaken.Add(course);
-
+                    {
+                        if (line.Contains("TRNS", StringComparison.OrdinalIgnoreCase) || line.Contains("Transfer", StringComparison.OrdinalIgnoreCase))currentRequirement.TransferCourses.Add(course);
+                        else if (line.Contains("IP", StringComparison.OrdinalIgnoreCase) || line.Contains("In Progress", StringComparison.OrdinalIgnoreCase))currentRequirement.InProgressCourses.Add(course);
+                        else
+                            currentRequirement.CoursesTaken.Add(course);
+                    }
                     continue;
                 }
             }
