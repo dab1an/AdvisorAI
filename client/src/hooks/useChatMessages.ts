@@ -1,6 +1,12 @@
 import { useCallback, useRef, useState } from "react";
 import type { UploadedFile } from "../components/ChatPage/ChatWindow/FileUploadPopover";
 
+const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+const API_BASE_URL = configuredApiBaseUrl
+  ? configuredApiBaseUrl.replace(/\/$/, "")
+  : (import.meta.env.DEV ? "http://localhost:5099" : "");
+const CHAT_ENDPOINT = API_BASE_URL ? `${API_BASE_URL}/api/Chat` : "/api/Chat";
+
 export interface Message {
   id: number;
   text: string;
@@ -21,7 +27,7 @@ async function fetchAIResponse(
   if (file) formData.append("file", file);
   if (fileType) formData.append("fileType", fileType);
 
-  const response = await fetch("http://localhost:5099/api/Chat", {
+  const response = await fetch(CHAT_ENDPOINT, {
     method: "POST",
     body: formData,
   });
