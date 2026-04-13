@@ -8,7 +8,7 @@ const NewChatButton = ({ onClick }: NewChatButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className="text-app-blue bg-app-yellow font flex h-[80] w-[27.5] items-center justify-center rounded-lg px-5 py-2 font-bold drop-shadow-lg hover:cursor-pointer"
+      className="text-app-blue bg-app-yellow font flex h-20px w-50px items-center justify-center rounded-lg px-5 py-2 font-bold drop-shadow-lg hover:cursor-pointer"
     >
       <p>New Chat</p>
     </button>
