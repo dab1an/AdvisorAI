@@ -35,6 +35,7 @@ html, body {
   transform: scale(1.03);
 }
 
+/* dark-glass removed — was causing issues in production (gradient not rendering correctly in dark mode)
 @media (prefers-color-scheme: dark) {
   .dark-glass {
     background: linear-gradient(
@@ -50,7 +51,7 @@ html, body {
       0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
       0 4px 30px rgba(0, 0, 0, 0.15);
   }
-}
+} */
 
 
 /* Speech-bubble tail — uses the same glass surface as the parent */
