@@ -29,7 +29,7 @@ const markdownComponents: Components = {
 };
 
 const ChatMessages = ({ messages, messagesEndRef }: ChatMessagesProps) => (
-  <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-8 py-6 no-scrollbar">
+  <div className="flex flex-1 flex-col gap-4 overflow-y-auto pt-16 px-8 md:py-6 no-scrollbar">
     {messages.map((msg) => {
       const isUser = msg.sender === "user";
       return (
