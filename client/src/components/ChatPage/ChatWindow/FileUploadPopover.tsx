@@ -62,12 +62,12 @@ const FileUploadPopover = ({
       onClick={onClose}
     >
       <div
-        className="relative w-[90vw] max-w-[480px] rounded-2xl bg-app-blue p-6 md:p-8 shadow-xl"
+        className="relative w-[90vw] max-w-[480px] rounded-2xl bg-white p-6 md:p-8 shadow-xl dark-glass"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors cursor-pointer"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors cursor-pointer"
           aria-label="Close"
         >
           <CloseModalIcon />
@@ -75,13 +75,13 @@ const FileUploadPopover = ({
 
         {showGuide ? (
           <>
-            <h2 className="text-lg font-semibold text-white">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
               Upload Your Degree Audit
             </h2>
-            <p className="mt-1 text-sm text-white/60">
+            <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
               Get personalized advising based on your academic progress
             </p>
-            <ol className="mt-5 space-y-2 text-sm text-white/80">
+            <ol className="mt-5 space-y-2 text-sm text-gray-700 dark:text-gray-300">
               <li>
                 1. Go to{" "}
                 <a
@@ -101,14 +101,14 @@ const FileUploadPopover = ({
                 setShowGuide(false);
                 inputRef.current?.click();
               }}
-              className="mt-6 w-full rounded-xl bg-app-gold py-3 text-sm font-semibold text-white transition-colors hover:opacity-90 cursor-pointer"
+              className="mt-6 w-full rounded-xl bg-app-blue py-3 text-sm font-semibold text-white transition-colors hover:bg-app-blue/90 cursor-pointer"
             >
               Upload Degree Audit
             </button>
           </>
         ) : (
           <>
-            <h2 className="mb-5 text-xl font-semibold text-white">
+            <h2 className="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
               File Upload
             </h2>
 
@@ -120,9 +120,9 @@ const FileUploadPopover = ({
                   value="audit"
                   checked={selectedType === "audit"}
                   onChange={() => setSelectedType("audit")}
-                  className="accent-app-gold"
+                  className="accent-app-blue"
                 />
-                <span className="text-sm text-white/80">Degree Audit</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Degree Audit</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
@@ -131,40 +131,40 @@ const FileUploadPopover = ({
                   value="document"
                   checked={selectedType === "document"}
                   onChange={() => setSelectedType("document")}
-                  className="accent-app-gold"
+                  className="accent-app-blue"
                 />
-                <span className="text-sm text-white/80">Other Document</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Other Document</span>
               </label>
             </div>
 
             <div
-              className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-white/20 bg-white/5 py-14 transition-colors hover:bg-white/10"
+              className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-gray-200 dark:border-slate-600 bg-gray-50 dark:bg-slate-800 py-14 transition-colors hover:bg-gray-100 dark:hover:bg-slate-700"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
               onClick={() => inputRef.current?.click()}
             >
               <UploadImageIcon />
-              <span className="text-sm font-medium text-white/60">
+              <span className="text-sm font-medium text-gray-400 dark:text-slate-400">
                 Drag and drop or click here
               </span>
             </div>
 
-            <p className="mt-4 text-center text-xs text-white/50">
+            <p className="mt-4 text-center text-xs text-gray-400 dark:text-slate-400">
               Accepted file types:{" "}
               {ACCEPTED_LABEL.split(", ").map((t, i) => (
                 <span key={t}>
                   {i > 0 && ", "}
-                  <span className="text-app-gold">{t}</span>
+                  <span className="text-blue-500 dark:text-blue-400">{t}</span>
                 </span>
               ))}
             </p>
 
             {selectedType === "audit" && (
-              <p className="mt-4 text-center text-xs text-white/50">
+              <p className="mt-4 text-center text-xs text-gray-400 dark:text-slate-400">
                 Don't have your audit yet?{" "}
                 <button
                   onClick={() => setShowGuide(true)}
-                  className="font-medium text-app-gold hover:underline cursor-pointer"
+                  className="font-medium text-app-blue dark:text-app-gold hover:underline cursor-pointer"
                 >
                   Need personalized help? Learn how!
                 </button>
