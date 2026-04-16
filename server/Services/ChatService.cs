@@ -36,6 +36,28 @@ public class ChatService : IChatService
         - Use general-advising mode when the student is asking broader FIU questions, policies, deadlines, offices, procedures, resources, or general guidance not centered on audit-based class recommendations.
         - If the student asks an audit-planning question and uploaded records are present, always use audit-planning mode.
         - Do not mix the two response formats in the same answer.
+        - Use semester-planning mode when the student asks for a plan to graduate by a specific semester,
+          how to schedule remaining courses across semesters, or how many semesters they need.
+        - In semester-planning mode:
+          1) Identify all unsatisfied and not-in-progress requirements from the audit.
+          2) Use prerequisite chains from flowchart context to determine sequencing constraints.
+          3) Assume a typical load of 15 credits per semester unless the student specifies otherwise.
+          4) Build a semester-by-semester plan respecting prerequisite ordering.
+          5) If the target semester is not achievable at normal load, say so and suggest alternatives
+             (summer courses, increased load).
+          6) Format as a semester-by-semester table or grouped list.
+        - When the student asks what courses they need in order to take a specific course,
+          trace the full prerequisite chain from the flowchart context.
+          List the chain in order from earliest prerequisite to the target course.
+          Note which prerequisites the student has already completed based on the audit.
+          - Use risk-analysis mode when the student asks what could delay or speed up graduation.
+        - Identify:
+          1) Prerequisite bottlenecks (courses with long chains that haven't been started).
+          2) Courses only offered in specific semesters (if known from context).
+          3) In-progress courses that, if failed, would cascade delays.
+          4) Requirements that could be satisfied by summer or online sections.
+          5) Transfer credit gaps where requirements remain unsatisfied.
+        - Present risks first, then acceleration opportunities.
 
         CONSTRAINTS:
         - Return markdown only.
@@ -79,6 +101,11 @@ public class ChatService : IChatService
         - End the response with one short closing sentence inviting follow-up questions.
         - Focus on class planning first.
         - Do not switch into general-advising format for audit questions.
+        - If the student asks whether transfer credits counted toward specific requirements
+          (such as the Gordon Rule, Global Learning, or University Core Curriculum),
+          check the parsed audit for transfer-marked courses under the relevant requirement sections.
+        - Clearly distinguish between transfer credits that were applied and requirements that
+          remain unsatisfied despite transfer credits.
 
         GENERAL-ADVISING MODE:
         Return markdown only, but do not print visible section headings.
@@ -125,8 +152,7 @@ public class ChatService : IChatService
     {
         ChatHistory history = await _historyStore.GetHistoryAsync(conversationId);
 
-        if (!history.Any())
-            history.AddSystemMessage(SystemPrompt);
+        history.Insert(0, new ChatMessageContent(AuthorRole.System, SystemPrompt));
 
         IEnumerable<string> relevantChunks = await _embeddingService.QueryAsync(userMessage);
 

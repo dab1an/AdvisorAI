@@ -37,7 +37,7 @@ const DegreeAuditModal = ({ onClose, onFileSelect }: DegreeAuditModalProps) => {
       onClick={onClose}
     >
       <div
-        className="relative w-[90vw] max-w-[440px] rounded-2xl bg-white p-6 md:p-8 shadow-xl dark-glass"
+        className="relative w-[90vw] max-w-[440px] rounded-2xl bg-white p-6 md:p-8 shadow-xl dark:bg-app-blue"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -73,7 +73,7 @@ const DegreeAuditModal = ({ onClose, onFileSelect }: DegreeAuditModalProps) => {
 
         <button
           onClick={() => inputRef.current?.click()}
-          className="mt-6 w-full rounded-xl bg-app-blue py-3 text-sm font-semibold text-white transition-colors hover:bg-app-blue/90 cursor-pointer"
+          className="mt-6 w-full rounded-xl bg-app-gold  py-3 text-sm font-semibold text-white transition-colors hover:bg-app-gold/90 cursor-pointer"
         >
           Upload Degree Audit
         </button>

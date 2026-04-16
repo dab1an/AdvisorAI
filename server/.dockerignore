@@ -1,0 +1,14 @@
+bin/
+obj/
+Tests/bin/
+Tests/obj/
+TestResults/
+.git/
+.gitignore
+.vscode/
+.idea/
+*.user
+*.suo
+*.swp
+*.log
+.DS_Store

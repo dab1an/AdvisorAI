@@ -63,9 +63,12 @@ const Sidebar = ({ isOpen, onClose, onNewChat }: SidebarProps) => {
         <SidebarSection
           title="Help us Improve!"
           links={[
-            { link: "https://google.com", text: "Make a Suggestion" },
-            { link: "https://google.com", text: "Report a Problem" },
-            { link: "https://google.com", text: "Leave a Review" },
+            { link: "mailto:dgarn011@fiu.edu", text: "Make a Suggestion" },
+            {
+              link: "mailto:fernandoazanza387@gmail.com",
+              text: "Report a Problem",
+            },
+            { link: "mailto:saherrera2004@gmail.com", text: "Leave a Review" },
           ]}
         />
 

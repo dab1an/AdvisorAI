@@ -28,6 +28,12 @@ public class Audit
                     string courses = string.Join(", ", requirement.CoursesTaken.Select(c => c.ToString()));
                     builder.AppendLine($"  Courses taken: {courses}");
                 }
+
+                if (requirement.InProgressCourses.Any())
+                {
+                    string inProgressCourses = string.Join(", ", requirement.InProgressCourses.Select(c => c.ToString()));
+                    builder.AppendLine($"  In-Progress courses: {inProgressCourses}");
+                }
             }
         }
 
