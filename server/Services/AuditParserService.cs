@@ -43,7 +43,7 @@ public class AuditParserService : IAuditParserService
         "MATHEMATICS MINOR REQUIRED"
     };
 
-    private static readonly Regex CourseRegex = new(@"^[A-Z]{3}\d{4}");
+    private static readonly Regex CourseRegex = new(@"^[A-Z]{3,4}\d{4}\b", RegexOptions.Compiled);
 
     public Audit Parse(Stream pdfStream)
     {
